@@ -1,15 +1,24 @@
+from mimetypes import init
+import os
+
 from fastapi import FastAPI, Depends, HTTPException, Header
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 
+from config import config
+
+# import os
+# from dotenv import load_dotenv
+
 app = FastAPI()
+# load_dotenv()
 
 #Jwt Configuration
-SECRET_KEY = "mysecretkey"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 15
+SECRET_KEY = config.SECRET_KEY
+ALGORITHM = config.ALGORITHM
+ACCESS_TOKEN_EXPIRE_MINUTES = int(config.ACCESS_TOKEN_EXPIRE_MINUTES)
 
 #Password Hashing Configuration
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -3,10 +3,12 @@ from fastapi.staticfiles import StaticFiles
 
 import os
 import shutil
+from dotenv import load_dotenv
 
 app = FastAPI()
+load_dotenv()
 
-UPLOAD_DIR = "uploads"
+UPLOAD_DIR = os.getenv("UPLOAD_DIR")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")

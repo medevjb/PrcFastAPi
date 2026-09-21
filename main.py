@@ -3,10 +3,13 @@ from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Boolean
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from typing import Optional
+import os
+from dotenv import load_dotenv
 
 app = FastAPI()
+load_dotenv()
 
-DATABASE_URL = "sqlite:///./testalchemy.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
